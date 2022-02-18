@@ -2,31 +2,51 @@ import { render } from '@testing-library/react'
 import { Component} from 'react'
 import { Row } from 'react-bootstrap'
 import SingleCard from './Singlecard'
+import SingleCardRec from './Singlecard'
 import './styles.css'
 
 
 class MainSec extends Component {
 
     state={
-        randomArt:["drake","linkin park","queen","bruno mars","2pac","rihanna","50-cent","eminem"],
+        // randomArt:["drake","linkin park","queen","bruno mars","2pac","rihanna","50-cent","eminem"],
         artists: [],
         recently: []
     }
 
+// fetchMovies = async (movie) => {
+//     let response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${movie}`)
+//     let data = await response.json()
+//     let main = data.data[0]
+//     console.log(this.state.artists)
+//     this.setState({...this.state, artists: data.data})
+//     console.log(main)
+// }
 
-    componentDidMount() {
-        this.state.randomArt.map((artist, idx) => {
-            fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${artist}`)
+//     componentDidMount() {
+
+//         this.state.randomArt.map(artist=>this.fetchMovies(artist) )
+      
+//     }
+
+changeRecently = (value) => {
+    this.setState({...this.state, recently : value})
+}
+
+fetches = (artist, value) => {
+    fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${artist}`)
             .then(response=>response.json())
             .then(data=>{
                 
-                this.setState({...this.state, artists: data.data})
-                this.setState({...this.state, r: data.data})
+                this.setState({...this.state, [value] : data.data})
                 console.log(this.state.artists)
 
             })
+}
 
-        })
+    componentDidMount() {
+
+        this.fetches('bruno mars', 'artists')
     }
 
 
@@ -40,8 +60,8 @@ render(){
             <h1 className="h1-main">Good morning</h1>
         </div>
         <Row id="main-section-small" >{
-this.state.artists.filter((artist, idx)=> idx < 8).map(artist => {return <SingleCard oneArtist={artist}/> })
-}
+this.state.artists.filter((artist, idx)=> idx < 8).map(artist => {return <SingleCard oneArtist={artist} key={artist.id}/> })
+        }
         </Row>
     </div>
 
@@ -50,6 +70,8 @@ this.state.artists.filter((artist, idx)=> idx < 8).map(artist => {return <Single
             <h2 className="h2-main">Recently played</h2>
         </div>
         <Row id="main-section-recent">
+            {this.state.recently.filter((artist, idx)=> idx > 16).map(artist => {return <SingleCard function={this.changeRecently} onArtist={artist} key={artist.id} /> })}
+
 
 
         </Row>
