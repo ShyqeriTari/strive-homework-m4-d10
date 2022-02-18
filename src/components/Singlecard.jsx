@@ -7,18 +7,18 @@ class SingleCard extends Component {
         artists: undefined
     }
 
-    // componentDidMount(){
+    componentDidMount(){
 
-    //     // console.log(this.props.artist)
-    // }
+        // console.log(this.props.artist)
+    }
 
-    // componentDidUpdate(prevProps){
-    //     if (prevProps.artist !== this.props.artist){
-    //         this.setState({artists: this.props.artist
-    //         })
-    //         // console.log(this.state.artists)
-    //     }
-    // }
+    componentDidUpdate(prevProps){
+        if (prevProps.artist !== this.props.artist){
+            this.setState({artists: this.props.artist
+            })
+            // console.log(this.state.artists)
+        }
+    }
 
     render() {
     return(

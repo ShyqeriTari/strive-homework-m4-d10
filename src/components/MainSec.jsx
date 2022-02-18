@@ -29,9 +29,20 @@ class MainSec extends Component {
       
 //     }
 
-changeRecently = (value) => {
-    this.setState({...this.state, recently : value})
-}
+// changeRecently = (value) => {
+//     this.setState({...this.state, recently : value})
+// }
+
+// secFetches= (artist, value) => {
+//     fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${artist}`)
+//     .then(response=>response.json())
+//     .then(data=>{
+        
+//         this.setState({...this.state, [value] : data.data})
+//         console.log(this.state.recently)
+
+//     })
+// }
 
 fetches = (artist, value) => {
     fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${artist}`)
@@ -47,6 +58,7 @@ fetches = (artist, value) => {
     componentDidMount() {
 
         this.fetches('bruno mars', 'artists')
+        // this.secFetches('eminem', 'recently')
     }
 
 
@@ -70,9 +82,11 @@ this.state.artists.filter((artist, idx)=> idx < 8).map(artist => {return <Single
             <h2 className="h2-main">Recently played</h2>
         </div>
         <Row id="main-section-recent">
-            {this.state.recently.filter((artist, idx)=> idx > 16).map(artist => {return <SingleCard function={this.changeRecently} onArtist={artist} key={artist.id} /> })}
+            {/* {this.state.recently.filter((artist, idx)=> idx < 8).map(artist => {return <SingleCardRec art={artist} key={artist.id} /> })} */}
 
-
+            {
+this.state.artists.filter((artist, idx)=> idx < 8).map(artist => {return <SingleCard oneArtist={artist} key={artist.id}/> })
+        }
 
         </Row>
 
@@ -84,7 +98,9 @@ this.state.artists.filter((artist, idx)=> idx < 8).map(artist => {return <Single
         </div>
         <p className="ml-2 to-try-main">Podcasts we think you will get hooked on.</p>
         <Row id="main-section-to-try">
-
+        {
+this.state.artists.filter((artist, idx)=> idx < 8).map(artist => {return <SingleCard oneArtist={artist} key={artist.id}/> })
+        }
         </Row>
     </div>
 
