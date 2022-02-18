@@ -37,8 +37,8 @@ const Navbar = () => {
                     </div>
                     </div>
 
-                    {/* <MainSec/> */}
-                    <Album/>
+                    <MainSec/>
+                    {/* <Album/> */}
                 </Col>
             </Row>
         </Col>
