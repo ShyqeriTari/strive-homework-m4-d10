@@ -1,5 +1,7 @@
 import { Component } from "react"
 import { Col } from "react-bootstrap"
+import './styles.css'
+
 
 class SingleCard extends Component {
 

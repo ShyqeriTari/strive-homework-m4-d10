@@ -1,4 +1,5 @@
 import { Col, Row } from "react-bootstrap"
+import Album from "./Album"
 import MainSec from "./MainSec"
 import './styles.css'
 
@@ -36,7 +37,8 @@ const Navbar = () => {
                     </div>
                     </div>
 
-                    <MainSec/>
+                    {/* <MainSec/> */}
+                    <Album/>
                 </Col>
             </Row>
         </Col>
