@@ -1,15 +1,47 @@
+import { render } from '@testing-library/react'
+import { Component} from 'react'
 import { Row } from 'react-bootstrap'
+import SingleCard from './Singlecard'
 import './styles.css'
 
 
-const MainSec = () => {
+class MainSec extends Component {
+
+    state={
+        randomArt:["drake","linkin park","queen","bruno mars","2pac","rihanna","50-cent","eminem"],
+        artists: [],
+        recently: []
+    }
+
+
+    componentDidMount() {
+        this.state.randomArt.map((artist, idx) => {
+            fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${artist}`)
+            .then(response=>response.json())
+            .then(data=>{
+                
+                this.setState({...this.state, artists: data.data})
+                this.setState({...this.state, r: data.data})
+                console.log(this.state.artists)
+
+            })
+
+        })
+    }
+
+
+    
+    
+render(){
     return(
         <>
         <div className="container-fluid px-5" style={{marginTop: '6em'}}>
         <div className="row ml-2">
             <h1 className="h1-main">Good morning</h1>
         </div>
-        <Row id="main-section-small" >
+        <Row id="main-section-small" >{
+this.state.artists.filter((artist, idx)=> idx < 8).map(artist => {return <SingleCard oneArtist={artist}/> })
+}
         </Row>
     </div>
 
@@ -37,6 +69,7 @@ const MainSec = () => {
     <div style={{height: '100px'}}></div>
     </>
     )
+}
 }
 
 export default MainSec
